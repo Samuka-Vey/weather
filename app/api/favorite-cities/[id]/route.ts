@@ -10,7 +10,7 @@ export async function PATCH(request: Request, { params }: Ctx) {
   if (id === null) return errorResponse("ID inválido.", 400);
 
   let body: Record<string, unknown>;
-  try { body = await request.json(); } catch { return errorResponse("Corpo da requisição inválido.", 400); }
+  try { body = await request.json();  console.log("POST body:", body);} catch { return errorResponse("Corpo da requisição inválido.", 400); }
 
   if (!("label" in body)) return errorResponse("Informe o campo editável 'label'.", 400);
   const label = parseLabel(body.label);
