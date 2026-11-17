@@ -12,7 +12,7 @@ export function parseId(raw: string): number | null {
 }
 
 export function parseLabel(value: unknown): string | null | undefined {
-  if (value === null || value === "") return null;
+  if (value === undefined || value === null || value === "") return null;
   if (typeof value !== "string") return undefined;
   const t = value.trim();
   return t.length <= 30 ? (t || null) : undefined;
