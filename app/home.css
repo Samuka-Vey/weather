@@ -2,8 +2,8 @@
 .home-page {
   min-height: 100vh;
   padding: 40px 20px;
-  background: #f5f6f8;
-  color: #222;
+  background: #c9dafd;
+  color: #0e289b;
 }
 
 .home-container {
@@ -11,7 +11,7 @@
   margin: 0 auto;
 }
 
-/* Cabeçalho */
+
 .home-header {
   display: flex;
   justify-content: space-between;
@@ -20,7 +20,9 @@
 }
 
 .home-header h1 {
-  font-size: 26px;
+  color:#555454;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 36px;
   margin: 0;
 }
 
@@ -31,10 +33,10 @@
 
 .favorites-link {
   text-decoration: none;
-  color: #333;
+  color: #67135d;
   background: white;
   padding: 10px 16px;
-  border: 1px solid #ddd;
+  border: 1px solid #a744ca;
   border-radius: 8px;
   transition: background 0.2s;
 }
@@ -43,7 +45,7 @@
   background: #eee;
 }
 
-/* Busca */
+
 .favorites-home-section {
   margin-bottom: 25px;
 }
@@ -78,8 +80,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: white;
-  border: 1px solid #e5e5e5;
+  background: rgb(180, 188, 234);
+  border: 1px solid #3c3e3c;
   border-radius: 12px;
   padding: 18px;
   color: #222;
@@ -144,7 +146,7 @@
 
 .favorite-card-weather small {
   margin-top: 5px;
-  color: #888;
+  color: #a17676;
   font-size: 11px;
 }
 
