@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import "./favorites.css";
 
 interface Favorite {
   id: number;
@@ -74,81 +75,80 @@ function FavoriteItem({
   }
 
   return (
-    <li>
-      <div>
-        {/* Informações da cidade */}
+    <li className="favorite-card">
+      {/* Informações da cidade */}
+      <div className="favorite-info">
         <div>
-          <div>
-            <Link
-              href={`/weather/${fav.latitude}/${fav.longitude}`}
-            >
-              {fav.name}
-            </Link>
-
-            <p>{fav.region}</p>
-
-            <p>
-              {fav.latitude}, {fav.longitude}
-            </p>
-          </div>
-
-          <span>
-            ★ Favorita
-          </span>
-        </div>
-
-        {/* Campo de rótulo */}
-        <div>
-          <label htmlFor={`label-${fav.id}`}>
-            Rótulo personalizado
-          </label>
-
-          <input
-            id={`label-${fav.id}`}
-            type="text"
-            value={label}
-            maxLength={30}
-            placeholder="Ex: Minha cidade, Trabalho..."
-            onChange={(e) => setLabel(e.target.value)}
-          />
-
-          <p>
-            {label.length}/30 caracteres
-          </p>
-        </div>
-
-        {/* Botões */}
-        <div>
-          <button
-            type="button"
-            onClick={save}
-            disabled={saving || removing}
+          <Link
+            href={`/weather/${fav.latitude}/${fav.longitude}`}
+            className="favorite-city-name"
           >
-            {saving ? "Salvando..." : "Salvar alterações"}
-          </button>
+            {fav.name}
+          </Link>
 
-          <button
-            type="button"
-            onClick={remove}
-            disabled={saving || removing}
-          >
-            {removing ? "Removendo..." : "Remover favorito"}
-          </button>
+          <p className="favorite-region">{fav.region}</p>
+
+          <p className="favorite-coordinates">
+            {fav.latitude}, {fav.longitude}
+          </p>
         </div>
 
-        {/* Mensagens */}
-        {error && (
-          <p role="alert">
-            {error}
-          </p>
-        )}
-
-        {message && (
-          <p role="status">
-            {message}
-          </p>
-        )}
+        <span className="favorite-badge">
+          ★ Favorita
+        </span>
       </div>
+
+      {/* Campo de rótulo */}
+      <div className="favorite-label">
+        <label htmlFor={`label-${fav.id}`}>
+          Rótulo personalizado
+        </label>
+
+        <input
+          id={`label-${fav.id}`}
+          type="text"
+          value={label}
+          maxLength={30}
+          placeholder="Ex: Minha cidade, Trabalho..."
+          onChange={(e) => setLabel(e.target.value)}
+        />
+
+        <p>{label.length}/30 caracteres</p>
+      </div>
+
+      {/* Botões */}
+      <div className="favorite-actions">
+        <button
+          type="button"
+          className="save-button"
+          onClick={save}
+          disabled={saving || removing}
+        >
+          {saving ? "Salvando..." : "Salvar alterações"}
+        </button>
+
+        <button
+          type="button"
+          className="remove-button"
+          onClick={remove}
+          disabled={saving || removing}
+        >
+          {removing ? "Removendo..." : "Remover favorito"}
+        </button>
+      </div>
+
+      {/* Mensagens */}
+      {error && (
+        <p className="favorite-error" role="alert">
+          {error}
+        </p>
+      )}
+
+      {message && (
+        <p className="favorite-success" role="status">
+          {message}
+        </p>
+      )}
     </li>
   );
 }
@@ -197,48 +197,41 @@ export default function FavoritesPage() {
   }, []);
 
   return (
-    <main>
-      <div>
+    <main className="favorites-page">
+      <div className="favorites-container">
+
         {/* Cabeçalho */}
-        <header>
+        <header className="favorites-header">
           <div>
             <h1>Minhas favoritas</h1>
-
-            <p>
-              Gerencie suas cidades favoritas.
-            </p>
+            <p>Gerencie suas cidades favoritas.</p>
           </div>
 
-          <Link href="/">
+          <Link href="/" className="favorites-back-link">
             ← Buscar cidades
           </Link>
         </header>
 
         {/* Contador */}
         {items && items.length > 0 && (
-          <div>
+          <div className="favorites-summary">
             <div>
               <p>Suas cidades salvas</p>
-              <p>
+              <span>
                 Acesse a previsão ou personalize seus rótulos.
-              </p>
+              </span>
             </div>
 
-            <span>
-              {items.length}
-            </span>
+            <strong>{items.length}</strong>
           </div>
         )}
 
         {/* Erro */}
         {error && (
-          <div role="alert">
-            {error}
+          <div className="favorites-error" role="alert">
+            <p>{error}</p>
 
-            <button
-              type="button"
-              onClick={load}
-            >
+            <button type="button" onClick={load}>
               Tentar novamente
             </button>
           </div>
@@ -246,17 +239,16 @@ export default function FavoritesPage() {
 
         {/* Carregamento */}
         {!items && !error && (
-          <div>
-            <p>
-              Carregando cidades favoritas...
-            </p>
+          <div className="favorites-status">
+            <div className="spinner" />
+            <p>Carregando cidades favoritas...</p>
           </div>
         )}
 
         {/* Lista vazia */}
         {items?.length === 0 && (
-          <div>
-            <div>☆</div>
+          <div className="favorites-empty">
+            <div className="empty-icon">☆</div>
 
             <h2>Nenhuma cidade favorita</h2>
 
@@ -264,7 +256,7 @@ export default function FavoritesPage() {
               Você ainda não adicionou nenhuma cidade aos favoritos.
             </p>
 
-            <Link href="/">
+            <Link href="/" className="explore-button">
               Explorar cidades
             </Link>
           </div>
@@ -272,7 +264,7 @@ export default function FavoritesPage() {
 
         {/* Lista de favoritos */}
         {items && items.length > 0 && (
-          <ul>
+          <ul className="favorites-list">
             {items.map((fav) => (
               <FavoriteItem
                 key={fav.id}
@@ -284,7 +276,7 @@ export default function FavoritesPage() {
         )}
 
         {/* Rodapé */}
-        <footer>
+        <footer className="favorites-footer">
           Dados meteorológicos fornecidos por{" "}
           <a
             href="https://open-meteo.com/"
@@ -295,6 +287,7 @@ export default function FavoritesPage() {
           </a>{" "}
           (CC BY 4.0).
         </footer>
+
       </div>
     </main>
   );
