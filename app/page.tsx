@@ -1,7 +1,7 @@
 
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "./home.css";
 
@@ -102,6 +102,7 @@ export default function Home() {
   const [favoritesError, setFavoritesError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
+  const messageTimer = useRef<number | null>(null);
 
   async function fetchFavorites(): Promise<Favorite[]> {
     const res = await fetch("/api/favorite-cities");
@@ -135,6 +136,9 @@ export default function Home() {
 
     return () => {
       cancelled = true;
+      if (messageTimer.current !== null) {
+        window.clearTimeout(messageTimer.current);
+      }
     };
   }, []);
 
@@ -180,6 +184,13 @@ export default function Home() {
 
       if (res.status === 201) {
         setMessage(`${city.name} adicionada aos favoritos.`);
+        if (messageTimer.current !== null) {
+          window.clearTimeout(messageTimer.current);
+        }
+        messageTimer.current = window.setTimeout(() => {
+          setMessage(null);
+          messageTimer.current = null;
+        }, 3000);
         await loadFavorites();
       } else {
         setError((await res.json()).error);
