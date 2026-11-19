@@ -124,6 +124,7 @@ export default function Home() {
 
         <footer className="site-footer">
           <span>Weather App</span>
+          <span>Interface em desenvolvimento</span>
         </footer>
       </main>
     </>
