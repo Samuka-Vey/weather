@@ -1,196 +1,131 @@
-
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import Link from "next/link";
+import Header from "@/components/Header";
 
-interface City {
+type City = {
   name: string;
   region: string;
   latitude: number;
   longitude: number;
-}
+};
+
+const exampleCities: City[] = [
+  { name: "Parnaíba", region: "Piauí, Brasil", latitude: -2.9055, longitude: -41.7734 },
+  { name: "Teresina", region: "Piauí, Brasil", latitude: -5.0892, longitude: -42.8019 },
+  { name: "São Paulo", region: "São Paulo, Brasil", latitude: -23.5475, longitude: -46.6361 },
+  { name: "Fortaleza", region: "Ceará, Brasil", latitude: -3.7172, longitude: -38.5433 },
+];
 
 export default function Home() {
   const [name, setName] = useState("");
-  const [cities, setCities] = useState<City[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [message, setMessage] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
 
-  async function search(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
-    setMessage(null);
+  const cities = useMemo(() => {
+    if (!name.trim()) return [];
+    return exampleCities.filter((city) =>
+      city.name.toLocaleLowerCase("pt-BR").includes(name.trim().toLocaleLowerCase("pt-BR"))
+    );
+  }, [name]);
 
-    try {
-      const res = await fetch(
-        `/api/cities?name=${encodeURIComponent(name)}`
-      );
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error);
-        setCities([]);
-      } else {
-        setCities(data);
-        setSearched(true);
-      }
-    } catch {
-      setError("Erro ao buscar cidades.");
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  async function addFavorite(city: City) {
-    setMessage(null);
-    setError(null);
-
-    try {
-      const res = await fetch("/api/favorite-cities", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(city),
-      });
-
-      if (res.status === 201) {
-        setMessage(`${city.name} adicionada aos favoritos.`);
-      } else {
-        setError((await res.json()).error);
-      }
-    } catch {
-      setError("Erro ao adicionar cidade aos favoritos.");
-    }
+  function search(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setSearched(true);
   }
 
   return (
-    <main>
-      <div>
-        {/* Cabeçalho */}
-        <header>
-          <div>
-            <h1>Weather App</h1>
-            <p>Encontre cidades e acompanhe o clima.</p>
-          </div>
+    <>
+      <Header />
+      <main className="page-shell">
+        <section className="search-intro">
+          <span className="eyebrow">PREVISÃO DO TEMPO</span>
+          <h1>Como está o clima?</h1>
+          <p>Pesquise uma cidade e acompanhe as condições do tempo.</p>
 
-          <Link href="/favorites">
-            ★ Favoritas
-          </Link>
-        </header>
-
-        {/* Busca */}
-        <section>
-          <h2>Buscar cidades</h2>
-
-          <p>
-            Digite o nome de uma cidade para consultar sua previsão.
-          </p>
-
-          <form onSubmit={search}>
-            <div>
-              <label htmlFor="name">
-                Nome da cidade
-              </label>
-
-              <input
-                id="name"
-                type="text"
-                placeholder="Ex: Parnaíba, Teresina..."
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-
-            <button type="submit" disabled={loading}>
-              {loading ? "Buscando..." : "Buscar cidade"}
-            </button>
+          <form className="search-form" onSubmit={search}>
+            <label className="sr-only" htmlFor="city-search">Nome da cidade</label>
+            <span className="search-symbol" aria-hidden="true">⌕</span>
+            <input
+              id="city-search"
+              type="search"
+              placeholder="Digite o nome de uma cidade..."
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+                setSearched(false);
+              }}
+              required
+            />
+            <button type="submit">Buscar</button>
           </form>
+          <p className="search-hint">Experimente: Parnaíba, Teresina ou Fortaleza</p>
         </section>
 
-        {/* Mensagens */}
-        {error && (
-          <div role="alert">
-            {error}
-          </div>
+        {searched && (
+          <section className="content-section results-section">
+            <div className="section-heading">
+              <div>
+                <h2>Resultados da busca</h2>
+                <p>{cities.length} cidade(s) encontrada(s)</p>
+              </div>
+            </div>
+
+            {cities.length > 0 ? (
+              <div className="city-list">
+                {cities.map((city) => (
+                  <article className="city-row" key={city.name}>
+                    <div className="city-main">
+                      <h3>{city.name}</h3>
+                      <p>{city.region}</p>
+                    </div>
+                    <Link
+                      className="text-link"
+                      href={`/weather/${city.latitude}/${city.longitude}`}
+                    >
+                      Ver clima <span aria-hidden="true">→</span>
+                    </Link>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">
+                <span className="empty-icon" aria-hidden="true">⌕</span>
+                <h3>Nenhuma cidade encontrada</h3>
+                <p>Tente pesquisar usando outro nome.</p>
+              </div>
+            )}
+          </section>
         )}
 
-        {message && (
-          <div role="status">
-            {message}
+        <section className="content-section">
+          <div className="section-heading">
+            <div>
+              <h2>Clima em destaque</h2>
+              <p>Uma prévia de como as informações serão apresentadas.</p>
+            </div>
           </div>
-        )}
-
-        {/* Resultados */}
-        <section>
-          {searched && (
+          <article className="weather-preview">
             <div>
-              <h2>Resultados</h2>
-              <span>{cities.length} cidade(s)</span>
+              <p className="muted-label">Parnaíba, Piauí</p>
+              <div className="temperature-line">
+                <strong>28°</strong>
+                <span className="weather-symbol" aria-hidden="true">☀</span>
+              </div>
+              <p className="weather-description">Parcialmente nublado</p>
             </div>
-          )}
-
-          {searched && !loading && cities.length === 0 && !error && (
-            <div>
-              <p>Nenhuma cidade encontrada.</p>
-              <p>Tente pesquisar por outro nome.</p>
+            <div className="weather-details">
+              <div><span>Sensação térmica</span><strong>30°C</strong></div>
+              <div><span>Umidade</span><strong>75%</strong></div>
+              <div><span>Vento</span><strong>12 km/h</strong></div>
             </div>
-          )}
-
-          <ul>
-            {cities.map((city) => (
-              <li key={`${city.latitude},${city.longitude}`}>
-                <div>
-                  <Link
-                    href={`/weather/${city.latitude}/${city.longitude}`}
-                  >
-                    {city.name}
-                  </Link>
-
-                  <p>{city.region}</p>
-
-                  <p>
-                    {city.latitude}, {city.longitude}
-                  </p>
-                </div>
-
-                <div>
-                  <Link
-                    href={`/weather/${city.latitude}/${city.longitude}`}
-                  >
-                    Ver clima
-                  </Link>
-
-                  <button
-                    type="button"
-                    onClick={() => addFavorite(city)}
-                  >
-                    ★ Favoritar
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
+          </article>
         </section>
 
-        {/* Rodapé */}
-        <footer>
-          Dados meteorológicos fornecidos por{" "}
-          <a
-            href="https://open-meteo.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open-Meteo
-          </a>{" "}
-          (CC BY 4.0).
+        <footer className="site-footer">
+          <span>Weather App</span>
         </footer>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
