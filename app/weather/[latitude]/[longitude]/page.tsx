@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import "./weather.css";
 
 interface Weather {
   current: {
@@ -45,19 +46,16 @@ export default function WeatherPage() {
 
   if (error) {
     return (
-      <main>
-        <div>
-          <div>⚠️</div>
-
-          <h1>Não foi possível carregar o clima</h1>
-
-          <p role="alert">
-            {error}
-          </p>
-
-          <Link href="/">
-            Voltar para busca
-          </Link>
+      <main className="weather-page">
+        <div className="weather-container">
+          <div className="status-card">
+            <div className="status-icon">⚠️</div>
+            <h1>Não foi possível carregar o clima</h1>
+            <p role="alert">{error}</p>
+            <Link href="/" className="back-link">
+              Voltar para busca
+            </Link>
+          </div>
         </div>
       </main>
     );
@@ -65,121 +63,93 @@ export default function WeatherPage() {
 
   if (!data) {
     return (
-      <main>
-        <div>
-          <div />
-          <p>
-            Carregando informações meteorológicas...
-          </p>
+      <main className="weather-page">
+        <div className="weather-container">
+          <div className="status-card">
+            <div className="spinner" />
+            <p>Carregando informações meteorológicas...</p>
+          </div>
         </div>
       </main>
     );
   }
 
   return (
-    <main>
-      <div>
+    <main className="weather-page">
+      <div className="weather-container">
+
         {/* Cabeçalho */}
-        <header>
+        <header className="weather-header">
           <div>
             <h1>Weather App</h1>
-
             <p>Previsão meteorológica</p>
           </div>
 
-          <Link href="/">
+          <Link href="/" className="back-link">
             ← Voltar
           </Link>
         </header>
 
         {/* Clima atual */}
-        <section>
+        <section className="current-weather">
           <div>
-            <div>
-              <p>Clima atual</p>
+            <p className="section-label">Clima atual</p>
 
-              <h2>
-                {data.current.temperature}°C
-              </h2>
+            <h2>{data.current.temperature}°C</h2>
 
-              <p>
-                {data.current.description}
-              </p>
+            <p className="weather-description">
+              {data.current.description}
+            </p>
 
-              <p>
-                Sensação térmica de {data.current.apparentTemperature}°C
-              </p>
-            </div>
+            <p className="feels-like">
+              Sensação térmica de {data.current.apparentTemperature}°C
+            </p>
+          </div>
 
-            <div>
-              <p>Coordenadas</p>
-
-              <p>
-                Latitude: {latitude}
-              </p>
-
-              <p>
-                Longitude: {longitude}
-              </p>
-            </div>
+          <div className="coordinates">
+            <p>Coordenadas</p>
+            <span>Latitude: {latitude}</span>
+            <span>Longitude: {longitude}</span>
           </div>
         </section>
 
         {/* Indicadores */}
-        <section>
-          <div>
+        <section className="weather-indicators">
+          <div className="indicator-card">
             <p>Umidade</p>
-
-            <p>
-              {data.current.humidity}%
-            </p>
-
-            <p>
-              💧 Umidade relativa do ar
-            </p>
+            <h3>{data.current.humidity}%</h3>
+            <span>💧 Umidade relativa do ar</span>
           </div>
 
-          <div>
+          <div className="indicator-card">
             <p>Velocidade do vento</p>
-
-            <p>
-              {data.current.windSpeed} km/h
-            </p>
-
-            <p>
-              🌬️ Velocidade atual
-            </p>
+            <h3>{data.current.windSpeed} km/h</h3>
+            <span>🌬️ Velocidade atual</span>
           </div>
 
-          <div>
+          <div className="indicator-card">
             <p>Sensação térmica</p>
-
-            <p>
-              {data.current.apparentTemperature}°C
-            </p>
-
-            <p>
-              🌡️ Temperatura percebida
-            </p>
+            <h3>{data.current.apparentTemperature}°C</h3>
+            <span>🌡️ Temperatura percebida</span>
           </div>
         </section>
 
         {/* Previsão semanal */}
-        <section>
-          <div>
+        <section className="forecast-section">
+          <div className="forecast-header">
             <h2>Próximos 7 dias</h2>
-
             <p>
               Acompanhe as condições meteorológicas da semana.
             </p>
           </div>
 
-          <div>
+          <div className="forecast-list">
             {data.daily.map((day) => (
-              <article key={day.date}>
-                <div>
+              <article className="forecast-card" key={day.date}>
+                <div className="forecast-content">
+
                   {/* Data e descrição */}
-                  <div>
+                  <div className="forecast-day">
                     <h3>
                       {new Date(`${day.date}T12:00:00`).toLocaleDateString(
                         "pt-BR",
@@ -191,41 +161,32 @@ export default function WeatherPage() {
                       )}
                     </h3>
 
-                    <p>
-                      {day.description}
-                    </p>
+                    <p>{day.description}</p>
                   </div>
 
                   {/* Temperaturas */}
-                  <div>
+                  <div className="forecast-details">
                     <div>
-                      <p>Mínima</p>
-                      <p>
-                        {day.temperatureMin}°C
-                      </p>
+                      <span>Mínima</span>
+                      <strong>{day.temperatureMin}°C</strong>
                     </div>
 
                     <div>
-                      <p>Máxima</p>
-                      <p>
-                        {day.temperatureMax}°C
-                      </p>
+                      <span>Máxima</span>
+                      <strong>{day.temperatureMax}°C</strong>
                     </div>
 
                     <div>
-                      <p>Amplitude</p>
-                      <p>
-                        {day.temperatureRange}°C
-                      </p>
+                      <span>Amplitude</span>
+                      <strong>{day.temperatureRange}°C</strong>
                     </div>
 
                     <div>
-                      <p>Chuva</p>
-                      <p>
-                        {day.precipitation} mm
-                      </p>
+                      <span>Chuva</span>
+                      <strong>{day.precipitation} mm</strong>
                     </div>
                   </div>
+
                 </div>
               </article>
             ))}
@@ -233,7 +194,7 @@ export default function WeatherPage() {
         </section>
 
         {/* Rodapé */}
-        <footer>
+        <footer className="weather-footer">
           Dados meteorológicos fornecidos por{" "}
           <a
             href="https://open-meteo.com/"
@@ -244,6 +205,7 @@ export default function WeatherPage() {
           </a>{" "}
           (CC BY 4.0).
         </footer>
+
       </div>
     </main>
   );
