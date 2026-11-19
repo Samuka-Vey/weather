@@ -1,0 +1,363 @@
+
+.favorites-page {
+  min-height: 100vh;
+  padding: 40px 20px;
+  background: #f5f6f8;
+  color: #222;
+}
+
+.favorites-container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* Cabeçalho */
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.favorites-header h1 {
+  font-size: 26px;
+  margin: 0;
+}
+
+.favorites-header p {
+  color: #777;
+  margin-top: 5px;
+}
+
+.favorites-back-link {
+  text-decoration: none;
+  color: #333;
+  background: white;
+  padding: 10px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.favorites-back-link:hover {
+  background: #eee;
+}
+
+/* Resumo */
+.favorites-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.favorites-summary p {
+  font-weight: 600;
+  margin: 0 0 5px;
+}
+
+.favorites-summary span {
+  color: #777;
+  font-size: 14px;
+}
+
+.favorites-summary strong {
+  font-size: 24px;
+  background: #f1f1f1;
+  border-radius: 8px;
+  padding: 8px 16px;
+}
+
+/* Lista */
+.favorites-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.favorite-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 24px;
+}
+
+/* Informações da cidade */
+.favorite-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.favorite-city-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+
+.favorite-city-name:hover {
+  text-decoration: underline;
+}
+
+.favorite-region {
+  color: #777;
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.favorite-coordinates {
+  color: #999;
+  font-size: 12px;
+  margin: 0;
+}
+
+.favorite-badge {
+  background: #f5f5f5;
+  color: #555;
+  border: 1px solid #e5e5e5;
+  border-radius: 20px;
+  padding: 6px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Rótulo */
+.favorite-label {
+  margin-bottom: 18px;
+}
+
+.favorite-label label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.favorite-label input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.favorite-label input:focus {
+  border-color: #777;
+}
+
+.favorite-label input::placeholder {
+  color: #aaa;
+}
+
+.favorite-label p {
+  text-align: right;
+  color: #999;
+  font-size: 12px;
+  margin: 5px 0 0;
+}
+
+/* Botões */
+.favorite-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.favorite-actions button {
+  padding: 10px 16px;
+  border-radius: 7px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.favorite-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.save-button {
+  background: #333;
+  color: white;
+  border: 1px solid #333;
+}
+
+.save-button:hover:not(:disabled) {
+  background: #555;
+}
+
+.remove-button {
+  background: white;
+  color: #b33;
+  border: 1px solid #ddd;
+}
+
+.remove-button:hover:not(:disabled) {
+  background: #fff1f1;
+  border-color: #e5baba;
+}
+
+/* Mensagens */
+.favorite-error,
+.favorite-success {
+  font-size: 14px;
+  margin: 15px 0 0;
+}
+
+.favorite-error {
+  color: #c0392b;
+}
+
+.favorite-success {
+  color: #27834a;
+}
+
+/* Erro geral */
+.favorites-error {
+  background: white;
+  border: 1px solid #e5baba;
+  border-radius: 10px;
+  padding: 20px;
+  color: #b33;
+}
+
+.favorites-error button {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.favorites-error button:hover {
+  background: #f5f5f5;
+}
+
+/* Estado vazio */
+.favorites-empty {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 40px;
+  color: #999;
+  margin-bottom: 15px;
+}
+
+.favorites-empty h2 {
+  font-size: 21px;
+  margin-bottom: 10px;
+}
+
+.favorites-empty p {
+  color: #777;
+  margin-bottom: 22px;
+}
+
+.explore-button {
+  display: inline-block;
+  background: #333;
+  color: white;
+  text-decoration: none;
+  padding: 11px 18px;
+  border-radius: 7px;
+  font-size: 14px;
+}
+
+.explore-button:hover {
+  background: #555;
+}
+
+/* Carregamento */
+.favorites-status {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #777;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid #e5e5e5;
+  border-top-color: #555;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Rodapé */
+.favorites-footer {
+  text-align: center;
+  margin-top: 35px;
+  color: #888;
+  font-size: 13px;
+}
+
+.favorites-footer a {
+  color: #444;
+}
+
+/* Responsividade */
+@media (max-width: 700px) {
+  .favorites-page {
+    padding: 25px 15px;
+  }
+
+  .favorites-header {
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .favorites-header h1 {
+    font-size: 22px;
+  }
+
+  .favorites-header {
+    flex-wrap: wrap;
+  }
+
+  .favorite-card {
+    padding: 18px;
+  }
+
+  .favorite-info {
+    flex-direction: column;
+  }
+
+  .favorite-actions {
+    flex-direction: column;
+  }
+
+  .favorite-actions button {
+    width: 100%;
+  }
+
+  .favorites-summary {
+    gap: 15px;
+  }
+}
