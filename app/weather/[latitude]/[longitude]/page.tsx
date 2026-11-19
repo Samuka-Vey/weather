@@ -1,250 +1,65 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import Header from "@/components/Header";
 
-interface Weather {
-  current: {
-    time: string;
-    temperature: number;
-    apparentTemperature: number;
-    humidity: number;
-    windSpeed: number;
-    description: string;
-  };
-  daily: {
-    date: string;
-    description: string;
-    temperatureMin: number;
-    temperatureMax: number;
-    temperatureRange: number;
-    precipitation: number;
-  }[];
-}
+const forecast = [
+  { day: "Hoje", condition: "Parcialmente nublado", min: 24, max: 30, symbol: "☀" },
+  { day: "Amanhã", condition: "Céu limpo", min: 25, max: 31, symbol: "☀" },
+  { day: "Quarta-feira", condition: "Possibilidade de chuva", min: 23, max: 29, symbol: "☂" },
+  { day: "Quinta-feira", condition: "Parcialmente nublado", min: 24, max: 30, symbol: "☁" },
+];
 
 export default function WeatherPage() {
-  const { latitude, longitude } = useParams<{
-    latitude: string;
-    longitude: string;
-  }>();
-
-  const [data, setData] = useState<Weather | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch(`/api/weather/${latitude}/${longitude}`)
-      .then(async (res) => {
-        const body = await res.json();
-        if (!res.ok) throw new Error(body.error);
-        setData(body);
-      })
-      .catch((e: Error) => setError(e.message));
-  }, [latitude, longitude]);
-
-  if (error) {
-    return (
-      <main>
-        <div>
-          <div>⚠️</div>
-
-          <h1>Não foi possível carregar o clima</h1>
-
-          <p role="alert">
-            {error}
-          </p>
-
-          <Link href="/">
-            Voltar para busca
-          </Link>
-        </div>
-      </main>
-    );
-  }
-
-  if (!data) {
-    return (
-      <main>
-        <div>
-          <div />
-          <p>
-            Carregando informações meteorológicas...
-          </p>
-        </div>
-      </main>
-    );
-  }
+  const { latitude, longitude } = useParams<{ latitude: string; longitude: string }>();
 
   return (
-    <main>
-      <div>
-        {/* Cabeçalho */}
-        <header>
-          <div>
-            <h1>Weather App</h1>
+    <>
+      <Header />
+      <main className="page-shell page-narrow">
+        <div className="back-row"><Link href="/" className="text-link">← Voltar para a busca</Link></div>
+        <section className="page-heading">
+          <span className="eyebrow">PREVISÃO DO TEMPO</span>
+          <h1>Clima da cidade</h1>
+          <p>Consulte as condições atuais e a previsão para os próximos dias.</p>
+        </section>
 
-            <p>Previsão meteorológica</p>
+        <section className="weather-preview detail-weather">
+          <div>
+            <p className="muted-label">Cidade selecionada</p>
+            <div className="temperature-line">
+              <strong>28°</strong>
+              <span className="weather-symbol" aria-hidden="true">☀</span>
+            </div>
+            <p className="weather-description">Parcialmente nublado</p>
           </div>
-
-          <Link href="/">
-            ← Voltar
-          </Link>
-        </header>
-
-        {/* Clima atual */}
-        <section>
-          <div>
-            <div>
-              <p>Clima atual</p>
-
-              <h2>
-                {data.current.temperature}°C
-              </h2>
-
-              <p>
-                {data.current.description}
-              </p>
-
-              <p>
-                Sensação térmica de {data.current.apparentTemperature}°C
-              </p>
-            </div>
-
-            <div>
-              <p>Coordenadas</p>
-
-              <p>
-                Latitude: {latitude}
-              </p>
-
-              <p>
-                Longitude: {longitude}
-              </p>
-            </div>
+          <div className="weather-details">
+            <div><span>Sensação térmica</span><strong>30°C</strong></div>
+            <div><span>Umidade</span><strong>75%</strong></div>
+            <div><span>Vento</span><strong>12 km/h</strong></div>
           </div>
         </section>
 
-        {/* Indicadores */}
-        <section>
-          <div>
-            <p>Umidade</p>
-
-            <p>
-              {data.current.humidity}%
-            </p>
-
-            <p>
-              💧 Umidade relativa do ar
-            </p>
+        <section className="content-section">
+          <div className="section-heading">
+            <div><h2>Próximos dias</h2><p>Resumo da previsão semanal.</p></div>
           </div>
-
-          <div>
-            <p>Velocidade do vento</p>
-
-            <p>
-              {data.current.windSpeed} km/h
-            </p>
-
-            <p>
-              🌬️ Velocidade atual
-            </p>
-          </div>
-
-          <div>
-            <p>Sensação térmica</p>
-
-            <p>
-              {data.current.apparentTemperature}°C
-            </p>
-
-            <p>
-              🌡️ Temperatura percebida
-            </p>
-          </div>
-        </section>
-
-        {/* Previsão semanal */}
-        <section>
-          <div>
-            <h2>Próximos 7 dias</h2>
-
-            <p>
-              Acompanhe as condições meteorológicas da semana.
-            </p>
-          </div>
-
-          <div>
-            {data.daily.map((day) => (
-              <article key={day.date}>
-                <div>
-                  {/* Data e descrição */}
-                  <div>
-                    <h3>
-                      {new Date(`${day.date}T12:00:00`).toLocaleDateString(
-                        "pt-BR",
-                        {
-                          weekday: "long",
-                          day: "2-digit",
-                          month: "long",
-                        }
-                      )}
-                    </h3>
-
-                    <p>
-                      {day.description}
-                    </p>
-                  </div>
-
-                  {/* Temperaturas */}
-                  <div>
-                    <div>
-                      <p>Mínima</p>
-                      <p>
-                        {day.temperatureMin}°C
-                      </p>
-                    </div>
-
-                    <div>
-                      <p>Máxima</p>
-                      <p>
-                        {day.temperatureMax}°C
-                      </p>
-                    </div>
-
-                    <div>
-                      <p>Amplitude</p>
-                      <p>
-                        {day.temperatureRange}°C
-                      </p>
-                    </div>
-
-                    <div>
-                      <p>Chuva</p>
-                      <p>
-                        {day.precipitation} mm
-                      </p>
-                    </div>
-                  </div>
-                </div>
+          <div className="forecast-list">
+            {forecast.map((day) => (
+              <article className="forecast-row" key={day.day}>
+                <span className="forecast-day">{day.day}</span>
+                <span className="forecast-symbol" aria-hidden="true">{day.symbol}</span>
+                <span className="forecast-condition">{day.condition}</span>
+                <span className="forecast-temperatures"><strong>{day.max}°</strong><span>{day.min}°</span></span>
               </article>
             ))}
           </div>
         </section>
-
-        {/* Rodapé */}
-        <footer>
-          Dados meteorológicos fornecidos por{" "}
-          <a
-            href="https://open-meteo.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open-Meteo
-          </a>{" "}
-          (CC BY 4.0).
-        </footer>
-      </div>
-    </main>
+        <p className="demo-note">Dados ilustrativos. Coordenadas: {latitude}, {longitude}. A conexão com a API será adicionada depois.</p>
+        <footer className="site-footer"><span>Weather App</span><span>Interface em desenvolvimento</span></footer>
+      </main>
+    </>
   );
 }
