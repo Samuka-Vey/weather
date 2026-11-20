@@ -191,6 +191,9 @@ export default function Home() {
           setMessage(null);
           messageTimer.current = null;
         }, 3000);
+        setName("");
+        setCities([]);
+        setSearched(false);
         await loadFavorites();
       } else {
         setError((await res.json()).error);
@@ -207,7 +210,7 @@ export default function Home() {
         {/* Cabeçalho */}
         <header className="home-header">
           <div>
-            <h1>Weather App</h1>
+            <h1>Tempo Legal</h1>
             <p>Encontre cidades e acompanhe o clima.</p>
           </div>
 
