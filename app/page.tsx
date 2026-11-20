@@ -216,7 +216,7 @@ export default function Home() {
 
           <Link href="/favorites" className="favorites-link">
             ★ Favoritas
-          </Link>
+          </Link>fix(home): limpa os campos do formulário e atualiza o título para Tempo Legal
         </header>
 
         {/* Busca */}
