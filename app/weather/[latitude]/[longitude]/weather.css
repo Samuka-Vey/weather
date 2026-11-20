@@ -44,7 +44,7 @@
   background: #EAF2F9;
 }
 
-/* Clima atual */
+/* Clima atual na Pag*/
 .current-weather {
   display: flex;
   justify-content: space-between;
@@ -79,7 +79,7 @@
   line-height: 1.8;
 }
 
-/* Indicadores */
+/* Indicadores da Pag*/
 .weather-indicators {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -111,13 +111,15 @@
   color: #8295A8;
 }
 
-/* Previsão */
+/* Previsão da Pag*/
 .forecast-header {
   margin-bottom: 20px;
 }
 
 .forecast-header h2 {
   margin-bottom: 5px;
+  color: #123B63;
+  font-weight: 700;
 }
 
 .forecast-list {
@@ -127,8 +129,8 @@
 }
 
 .forecast-card {
-  background: white;
-  border: 1px solid #e5e5e5;
+  background: #FFFFFF;
+  border: 1px solid #DFEAF3;
   border-radius: 10px;
   padding: 20px;
 }
@@ -144,10 +146,12 @@
   text-transform: capitalize;
   margin: 0 0 6px;
   font-size: 16px;
+  color: #245780;
+  font-weight: 600;
 }
 
 .forecast-day p {
-  color: #777;
+  color: #647C94;
   margin: 0;
   font-size: 14px;
 }
@@ -165,27 +169,29 @@
 }
 
 .forecast-details span {
-  color: #888;
+  color: #8295A8;
   font-size: 12px;
 }
 
 .forecast-details strong {
   font-size: 15px;
+  color: #245780;
+  font-weight: 600;
 }
 
-/* Rodapé */
+/* Rodapé da Pag*/
 .weather-footer {
   text-align: center;
   margin-top: 35px;
-  color: #888;
+  color: #8295A8;
   font-size: 13px;
 }
 
 .weather-footer a {
-  color: #444;
+  color: #1769AA;
 }
 
-/* Responsividade */
+
 @media (max-width: 700px) {
   .weather-header {
     align-items: flex-start;
