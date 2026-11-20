@@ -1,6 +1,6 @@
 # Previsão do Tempo
 
-Aplicação web desenvolvida para a disciplina de **Programação Web** (UESPI, Curso de Tecnologia em Sistemas de Computação, professor Eyder Rios), 2ª Avaliação, Problema 05.
+Aplicação web desenvolvida para a disciplina de **Programação Web** (UESPI, Curso de Tecnologia em Sistemas de Computação, professor Eyder Rios), 2ª Avaliação, **Problema 05**.
 
 ## Integrantes
 
