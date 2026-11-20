@@ -1,17 +1,14 @@
-
 .favorites-page {
   min-height: 100vh;
   padding: 40px 20px;
-  background: #f5f6f8;
-  color: #222;
+   background: #f1eefc;
+  color: #123B63;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
-
 .favorites-container {
   max-width: 1000px;
   margin: 0 auto;
 }
-
-/* Cabeçalho */
 .favorites-header {
   display: flex;
   justify-content: space-between;
@@ -22,34 +19,34 @@
 .favorites-header h1 {
   font-size: 26px;
   margin: 0;
+  color: #123B63;
+  font-weight: 700;
 }
 
 .favorites-header p {
-  color: #777;
+  color: #647C94;
   margin-top: 5px;
 }
 
 .favorites-back-link {
   text-decoration: none;
-  color: #333;
-  background: white;
+  color: #1769AA;
+  background: #FFFFFF;
   padding: 10px 16px;
-  border: 1px solid #ddd;
+  border: 1px solid #DFEAF3;
   border-radius: 8px;
   transition: background 0.2s;
 }
 
 .favorites-back-link:hover {
-  background: #eee;
+  background: #EAF2F9;
 }
-
-/* Resumo */
 .favorites-summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
-  border: 1px solid #e5e5e5;
+  background: #FFFFFF;
+  border: 1px solid #DFEAF3;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
@@ -58,21 +55,21 @@
 .favorites-summary p {
   font-weight: 600;
   margin: 0 0 5px;
+  color: #123B63;
 }
 
 .favorites-summary span {
-  color: #777;
+  color: #647C94;
   font-size: 14px;
 }
 
 .favorites-summary strong {
   font-size: 24px;
-  background: #f1f1f1;
+  background: #EAF2F9;
+  color: #1769AA;
   border-radius: 8px;
   padding: 8px 16px;
 }
-
-/* Lista */
 .favorites-list {
   display: flex;
   flex-direction: column;
@@ -83,13 +80,12 @@
 }
 
 .favorite-card {
-  background: white;
-  border: 1px solid #e5e5e5;
+  background: #FFFFFF;
+  border: 1px solid #DFEAF3;
   border-radius: 10px;
   padding: 24px;
 }
 
-/* Informações da cidade */
 .favorite-info {
   display: flex;
   justify-content: space-between;
@@ -101,7 +97,7 @@
 .favorite-city-name {
   font-size: 20px;
   font-weight: 600;
-  color: #222;
+  color: #1769AA;
   text-decoration: none;
 }
 
@@ -110,21 +106,21 @@
 }
 
 .favorite-region {
-  color: #777;
+  color: #647C94;
   margin: 6px 0;
   font-size: 14px;
 }
 
 .favorite-coordinates {
-  color: #999;
+  color: #8295A8;
   font-size: 12px;
   margin: 0;
 }
 
 .favorite-badge {
-  background: #f5f5f5;
-  color: #555;
-  border: 1px solid #e5e5e5;
+  background: #EAF2F9;
+  color: #245780;
+  border: 1px solid #DFEAF3;
   border-radius: 20px;
   padding: 6px 12px;
   font-size: 13px;
@@ -141,35 +137,38 @@
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 8px;
+  color: #245780;
 }
 
 .favorite-label input {
   width: 100%;
   padding: 11px 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #D8E5F0;
   border-radius: 7px;
   font-size: 14px;
   outline: none;
   box-sizing: border-box;
   transition: border-color 0.2s;
+  color: #123B63;
+  background: #FFFFFF;
+  font-family: inherit;
 }
 
 .favorite-label input:focus {
-  border-color: #777;
+  border-color: #1769AA;
 }
 
 .favorite-label input::placeholder {
-  color: #aaa;
+  color: #8295A8;
 }
 
 .favorite-label p {
   text-align: right;
-  color: #999;
+  color: #8295A8;
   font-size: 12px;
   margin: 5px 0 0;
 }
 
-/* Botões */
 .favorite-actions {
   display: flex;
   gap: 10px;
@@ -181,6 +180,7 @@
   font-size: 14px;
   cursor: pointer;
   transition: background 0.2s;
+  font-family: inherit;
 }
 
 .favorite-actions button:disabled {
@@ -189,27 +189,27 @@
 }
 
 .save-button {
-  background: #333;
-  color: white;
-  border: 1px solid #333;
+  background: #1769AA;
+  color: #FFFFFF;
+  border: 1px solid #1769AA;
 }
 
 .save-button:hover:not(:disabled) {
-  background: #555;
+  background: #123B63;
 }
 
 .remove-button {
-  background: white;
-  color: #b33;
-  border: 1px solid #ddd;
+  background: #FFFFFF;
+  color: #B54747;
+  border: 1px solid #DFEAF3;
 }
 
 .remove-button:hover:not(:disabled) {
-  background: #fff1f1;
-  border-color: #e5baba;
+  background: #FFF1F0;
+  border-color: #E5BABA;
 }
 
-/* Mensagens */
+
 .favorite-error,
 .favorite-success {
   font-size: 14px;
@@ -217,38 +217,37 @@
 }
 
 .favorite-error {
-  color: #c0392b;
+  color: #B54747;
 }
 
 .favorite-success {
-  color: #27834a;
+  color: #27834A;
 }
 
-/* Erro geral */
 .favorites-error {
-  background: white;
-  border: 1px solid #e5baba;
+  background: #FFFFFF;
+  border: 1px solid #E5BABA;
   border-radius: 10px;
   padding: 20px;
-  color: #b33;
+  color: #B54747;
 }
-
 .favorites-error button {
-  background: white;
-  border: 1px solid #ddd;
+  background: #FFFFFF;
+  border: 1px solid #DFEAF3;
   border-radius: 6px;
   padding: 8px 12px;
   cursor: pointer;
+  color: #245780;
+  font-family: inherit;
 }
 
 .favorites-error button:hover {
-  background: #f5f5f5;
+  background: #EAF2F9;
 }
 
-/* Estado vazio */
 .favorites-empty {
-  background: white;
-  border: 1px solid #e5e5e5;
+  background: #FFFFFF;
+  border: 1px solid #DFEAF3;
   border-radius: 12px;
   padding: 50px 20px;
   text-align: center;
@@ -256,49 +255,48 @@
 
 .empty-icon {
   font-size: 40px;
-  color: #999;
+  color: #8295A8;
   margin-bottom: 15px;
 }
 
 .favorites-empty h2 {
   font-size: 21px;
   margin-bottom: 10px;
+  color: #123B63;
 }
 
 .favorites-empty p {
-  color: #777;
+  color: #647C94;
   margin-bottom: 22px;
 }
 
 .explore-button {
   display: inline-block;
-  background: #333;
-  color: white;
+  background: #1769AA;
+  color: #FFFFFF;
   text-decoration: none;
   padding: 11px 18px;
   border-radius: 7px;
   font-size: 14px;
 }
-
 .explore-button:hover {
-  background: #555;
+  background: #123B63;
 }
 
-/* Carregamento */
 .favorites-status {
-  background: white;
-  border: 1px solid #e5e5e5;
+  background: #FFFFFF;
+  border: 1px solid #DFEAF3;
   border-radius: 10px;
   padding: 40px 20px;
   text-align: center;
-  color: #777;
+  color: #647C94;
 }
 
 .spinner {
   width: 30px;
   height: 30px;
-  border: 3px solid #e5e5e5;
-  border-top-color: #555;
+  border: 3px solid #DFEAF3;
+  border-top-color: #1769AA;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 0 auto 15px;
@@ -310,19 +308,17 @@
   }
 }
 
-/* Rodapé */
 .favorites-footer {
   text-align: center;
   margin-top: 35px;
-  color: #888;
+  color: #8295A8;
   font-size: 13px;
 }
 
 .favorites-footer a {
-  color: #444;
+  color: #1769AA;
 }
 
-/* Responsividade */
 @media (max-width: 700px) {
   .favorites-page {
     padding: 25px 15px;
