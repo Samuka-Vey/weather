@@ -1,9 +1,9 @@
-
 .weather-page {
   min-height: 100vh;
   padding: 40px 20px;
-  background: #f5f6f8;
-  color: #222;
+  background: #F4F8FC;
+  color: #172B4D;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
 .weather-container {
@@ -21,25 +21,27 @@
 .weather-header h1 {
   font-size: 26px;
   margin: 0;
+  color: #123B63;
+  font-weight: 700;
 }
 
 .weather-header p,
 .forecast-header p {
-  color: #777;
+  color: #647C94;
   margin-top: 5px;
 }
 
 .back-link {
   text-decoration: none;
-  color: #333;
-  background: white;
+  color: #245780;
+  background: #FFFFFF;
   padding: 10px 16px;
-  border: 1px solid #ddd;
+  border: 1px solid #D8E5F0;
   border-radius: 8px;
 }
 
 .back-link:hover {
-  background: #eee;
+  background: #EAF2F9;
 }
 
 /* Clima atual */
@@ -47,30 +49,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: #FFFFFF;
   padding: 30px;
   border-radius: 12px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #DFEAF3;
   margin-bottom: 20px;
 }
 
 .section-label {
-  color: #777;
+  color: #647C94;
   margin: 0;
 }
 
 .current-weather h2 {
   font-size: 48px;
   margin: 10px 0;
+  color: #1769AA;
+  font-weight: 700;
 }
 
 .feels-like {
-  color: #777;
+  color: #647C94;
   font-size: 14px;
 }
 
 .coordinates {
-  color: #777;
+  color: #647C94;
   font-size: 14px;
   line-height: 1.8;
 }
@@ -84,25 +88,27 @@
 }
 
 .indicator-card {
-  background: white;
+  background: #FFFFFF;
   padding: 20px;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #DFEAF3;
   border-radius: 10px;
 }
 
 .indicator-card p {
-  color: #777;
+  color: #647C94;
   margin: 0 0 12px;
 }
 
 .indicator-card h3 {
   font-size: 24px;
   margin: 0 0 10px;
+  color: #245780;
+  font-weight: 700;
 }
 
 .indicator-card span {
   font-size: 13px;
-  color: #888;
+  color: #8295A8;
 }
 
 /* Previsão */
