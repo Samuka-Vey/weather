@@ -18,7 +18,7 @@ export async function PATCH(request: Request, { params }: Ctx) {
 
   const info = db.prepare("UPDATE favorite_cities SET label = ? WHERE id = ?").run(label, id);
   if (info.changes === 0) return errorResponse("Cidade favorita não encontrada.", 404);
-  return NextResponse.json(db.prepare("SELECT * FROM favorite_cities WHERE id = ?").get(id));
+  return NextResponse.json(db.prepare("SELECT * FROM favorite_cities WHERE id = ?").get(id), { status: 200 });
 }
 
 export async function DELETE(_req: Request, { params }: Ctx) {
