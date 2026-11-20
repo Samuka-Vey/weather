@@ -14,7 +14,8 @@ export async function GET(request: Request) {
         region: [c.admin1, c.country].filter(Boolean).join(", "),
         latitude: c.latitude,
         longitude: c.longitude,
-      }))
+      })),
+      { status: 200 }
     );
   } catch (e) {
     if (e instanceof ExternalApiError) return errorResponse(e.message, 502);
