@@ -5,7 +5,7 @@ import { parseLatitude, parseLongitude, parseLabel } from "@/lib/validation";
 
 export async function GET() {
   const rows = db.prepare("SELECT * FROM favorite_cities ORDER BY created_at DESC, id DESC").all();
-  return NextResponse.json(rows);
+  return NextResponse.json(rows, { status: 200 });
 }
 
 export async function POST(request: Request) {
