@@ -2,11 +2,10 @@
 .home-page {
   min-height: 100vh;
   padding: 40px 20px;
-  background: #F4F8FC;
+  background: #f1eefc;
   color: #123B63;
   font-family: 'Inter', 'Segoe UI', sans-serif;
 }
-
 .home-container {
   max-width: 1000px;
   margin: 0 auto;
@@ -18,7 +17,6 @@
   align-items: center;
   margin-bottom: 35px;
 }
-
 .home-header h1 {
   color: #123B63;
   font-family: 'Inter', 'Segoe UI', sans-serif;
@@ -31,7 +29,6 @@
   color: #647C94;
   margin-top: 5px;
 }
-
 .favorites-link {
   text-decoration: none;
   color: #1769AA;
@@ -73,7 +70,6 @@
   aspect-ratio: 1;
   min-width: 0;
 }
-
 .favorite-weather-link {
   height: 100%;
   box-sizing: border-box;
