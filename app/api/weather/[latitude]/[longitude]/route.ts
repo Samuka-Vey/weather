@@ -36,7 +36,7 @@ export async function GET(
         temperatureRange: round(f.daily.temperature_2m_max[i] - f.daily.temperature_2m_min[i]),
         precipitation: f.daily.precipitation_sum[i],
       })),
-    });
+    }, { status: 200 });
   } catch (e) {
     if (e instanceof ExternalApiError) return errorResponse(e.message, 502);
     return errorResponse("Erro interno.", 500);
