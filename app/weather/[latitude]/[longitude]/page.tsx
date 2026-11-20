@@ -81,7 +81,7 @@ export default function WeatherPage() {
         {/* Cabeçalho */}
         <header className="weather-header">
           <div>
-            <h1>Weather App</h1>
+            <h1>Tempo Legal</h1>
             <p>Previsão meteorológica</p>
           </div>
 
